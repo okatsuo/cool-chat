@@ -1,4 +1,4 @@
-import { Arg, Mutation, Query, Resolver } from 'type-graphql'
+import { Arg, Mutation, PubSub, PubSubEngine, Query, Resolver, Root, Subscription } from 'type-graphql'
 import { MessageInputInterface, MessageRepository } from '../../fake-repository'
 import { MessageSchema } from '../schema/message-schema'
 
@@ -13,8 +13,18 @@ export class MessageResolver {
 
   @Mutation(() => MessageSchema)
   async messageCreate (
-    @Arg('fields', () => MessageInputInterface) fields: MessageInputInterface
+    @Arg('fields', () => MessageInputInterface) fields: MessageInputInterface,
+    @PubSub() pubSub: PubSubEngine
   ): Promise<MessageSchema> {
-    return this.messagesRepository.messageCreate(fields)
+    const new_message = await this.messagesRepository.messageCreate(fields)
+    await pubSub.publish('new_message', new_message)
+    return new_message
+  }
+
+  @Subscription(() => MessageSchema, { topics: 'new_message' })
+  async newMessage (
+    @Root() new_message: MessageSchema
+  ): Promise<MessageSchema> {
+    return new_message
   }
 }
