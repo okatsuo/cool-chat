@@ -1,7 +1,7 @@
 import 'reflect-metadata'
 import 'dotenv/config'
 import { ApolloServer } from 'apollo-server'
-import { MessageResolver } from '../main/resolver/message-resolver'
+import { MessageResolver } from '../resolver/message-resolver'
 import { buildSchema } from 'type-graphql'
 
 class Main {

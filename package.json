@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon src/server/index.ts --exec ts-node src/server/index.ts"
+    "dev": "nodemon src/main/server/index.ts --exec ts-node src/main/server/index.ts"
   },
   "keywords": [],
   "author": "Rafael Gonçalves <rafael.goncanna@gmail.com>",
