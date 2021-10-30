@@ -1,6 +1,16 @@
+import { ApolloServer } from 'apollo-server'
+
 class Main {
-  start () {
-    console.log('e lá vamos nós!') // TODO instalar o ESLint e sepá o husky
+  private PORT = 6767 || process.env.PORT;
+
+  async start () {
+    const server = new ApolloServer({
+    })
+
+    await server.listen(this.PORT)
+      .then(({ url }) => {
+        console.log(`Hello ~ server running at ${url}`)
+      })
   }
 }
 
