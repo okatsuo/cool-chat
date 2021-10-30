@@ -3,19 +3,27 @@ import 'dotenv/config'
 import { ApolloServer } from 'apollo-server'
 import { MessageResolver } from '../resolver/message-resolver'
 import { buildSchema } from 'type-graphql'
+import { ConnectionParamsInterface } from './protocol'
 
 class Main {
   private PORT = process.env.PORT || 6767;
 
   async start () {
-    console.log(process.env.PORT || 6767)
-
     const schema = await buildSchema({
       resolvers: [MessageResolver]
     })
 
     const server = new ApolloServer({
-      schema
+      schema,
+      subscriptions: {
+        onConnect: (connectionParams: ConnectionParamsInterface, webSocket, context) => {
+          if (connectionParams.Authorization) {
+            return console.log('a:', connectionParams.Authorization)
+          }
+
+          throw new Error('token is missing.')
+        }
+      }
     })
     await server.listen(this.PORT)
       .then(({ url }) => {
