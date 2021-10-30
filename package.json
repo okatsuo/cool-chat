@@ -34,5 +34,8 @@
     "*.{ts,js}": [
       "yarn eslint 'src/**'"
     ]
+  },
+  "dependencies": {
+    "apollo-server": "^3.4.0"
   }
 }
