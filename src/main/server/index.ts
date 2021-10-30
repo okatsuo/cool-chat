@@ -4,13 +4,14 @@ import { ApolloServer } from 'apollo-server'
 import { MessageResolver } from '../resolver/message-resolver'
 import { buildSchema } from 'type-graphql'
 import { ConnectionParamsInterface } from './protocol'
+import { UserResolver } from '../resolver/user-resolver'
 
 class Main {
   private PORT = process.env.PORT || 6767;
 
   async start () {
     const schema = await buildSchema({
-      resolvers: [MessageResolver]
+      resolvers: [MessageResolver, UserResolver]
     })
 
     const server = new ApolloServer({
