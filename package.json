@@ -36,7 +36,7 @@
     ]
   },
   "dependencies": {
-    "apollo-server": "^3.4.0",
+    "apollo-server": "2.21.0",
     "class-validator": "^0.13.1",
     "dotenv": "^10.0.0",
     "graphql": "15.3.0",
