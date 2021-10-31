@@ -1,10 +1,14 @@
 import { User } from '.prisma/client'
 import { Arg, Mutation, Query, Resolver } from 'type-graphql'
-import { UserCreateRepository, UserInputInterface, UsersRepository } from '../../repository/user'
-import { UserConfirmationInputInterface } from '../../repository/user/interface'
-import { LoginRepository } from '../../repository/user/login'
-import { UserDeleteRepository } from '../../repository/user/user-delete'
 import { UserSchema } from '../schema/user-schema'
+import {
+  UserConfirmationInputInterface,
+  UserCreateRepository,
+  UserInputInterface,
+  UsersRepository,
+  LoginRepository,
+  UserDeleteRepository
+} from '../../repository/user'
 
 @Resolver(() => UserSchema)
 export class UserResolver {

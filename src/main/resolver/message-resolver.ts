@@ -1,12 +1,15 @@
 import { Message } from '.prisma/client'
 import { Arg, FieldResolver, Mutation, PubSub, PubSubEngine, Query, Resolver, Root, Subscription } from 'type-graphql'
-import { MessageDeleteInputInterface, MessageInputInterface } from '../../repository/messages'
-import { MessageCreateRepository } from '../../repository/messages/message-create'
-import { MessageDeleteRepository } from '../../repository/messages/message-delete'
-import { MessagesRepository } from '../../repository/messages/messages'
 import { UserByIdRepository } from '../../repository/user/user'
 import { topics } from '../../utils/constants'
 import { MessageSchema } from '../schema/message-schema'
+import {
+  MessageDeleteInputInterface,
+  MessageInputInterface,
+  MessageCreateRepository,
+  MessageDeleteRepository,
+  MessagesRepository
+} from '../../repository/messages'
 
 @Resolver(MessageSchema)
 export class MessageResolver {
