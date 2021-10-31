@@ -2,10 +2,19 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+  provider      = "prisma-client-js"
+  binaryTargets = ["native"]
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider = "sqlite"
+  url      = "file:./sql-database/dev.db"
+}
+
+model User {
+  id         Int      @id @default(autoincrement())
+  name       String
+  email      String
+  created_at DateTime @default(now())
+  updateD_at DateTime @default(now()) @updatedAt
 }
