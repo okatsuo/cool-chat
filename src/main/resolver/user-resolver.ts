@@ -1,5 +1,5 @@
 import { User } from '.prisma/client'
-import { Arg, Mutation, Query, Resolver } from 'type-graphql'
+import { Arg, FieldResolver, Mutation, Query, Resolver, Root } from 'type-graphql'
 import { UserSchema } from '../schema/user-schema'
 import {
   UserConfirmationInputInterface,
@@ -9,9 +9,15 @@ import {
   LoginRepository,
   UserDeleteRepository
 } from '../../repository/user'
+import { UserMessageRepository } from '../../repository/user/user-message'
 
 @Resolver(() => UserSchema)
 export class UserResolver {
+  @FieldResolver()
+  message (@Root() user: User) {
+    return UserMessageRepository(user.id)
+  }
+
   @Query(() => [UserSchema])
   async users (): Promise<User[]> {
     return UsersRepository()
