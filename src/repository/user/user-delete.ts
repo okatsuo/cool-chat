@@ -1,8 +1,8 @@
 import { compare_hash } from '../../infra/cryptografy'
 import { prisma } from '../prisma'
-import { UserDeleteInputInterface } from './interface'
+import { UserConfirmationInputInterface } from './interface'
 
-export const UserDeleteRepository = async (fields: UserDeleteInputInterface): Promise<boolean> => {
+export const UserDeleteRepository = async (fields: UserConfirmationInputInterface): Promise<boolean> => {
   try {
     const { email, password } = fields
     const user = await prisma.user.findFirst({ where: { email } })

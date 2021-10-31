@@ -1,2 +1,2 @@
-export { UserDeleteInputInterface } from './user-delete'
+export { UserConfirmationInputInterface } from './user-confirmation'
 export { UserInputInterface } from './user-input'

@@ -1,7 +1,7 @@
 import { Field, InputType } from 'type-graphql'
 
 @InputType()
-export class UserDeleteInputInterface {
+export class UserConfirmationInputInterface {
   @Field()
   email: string
 

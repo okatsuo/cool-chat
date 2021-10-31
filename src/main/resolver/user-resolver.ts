@@ -1,7 +1,8 @@
 import { User } from '.prisma/client'
 import { Arg, Mutation, Query, Resolver } from 'type-graphql'
 import { UserCreateRepository, UserInputInterface, UsersRepository } from '../../repository/user'
-import { UserDeleteInputInterface } from '../../repository/user/interface'
+import { UserConfirmationInputInterface } from '../../repository/user/interface'
+import { LoginRepository } from '../../repository/user/login'
 import { UserDeleteRepository } from '../../repository/user/user-delete'
 import { UserSchema } from '../schema/user-schema'
 
@@ -13,8 +14,10 @@ export class UserResolver {
   }
 
   @Query(() => String)
-  async login (): Promise<String> {
-    return 'fake-token'
+  async login (
+    @Arg('fields', () => UserConfirmationInputInterface) fields: UserConfirmationInputInterface
+  ): Promise<string> {
+    return LoginRepository(fields)
   }
 
   @Mutation(() => UserSchema)
@@ -26,7 +29,7 @@ export class UserResolver {
 
   @Mutation(() => Boolean)
   async userDelete (
-    @Arg('fields', () => UserDeleteInputInterface) fields:UserDeleteInputInterface
+    @Arg('fields', () => UserConfirmationInputInterface) fields: UserConfirmationInputInterface
   ): Promise<boolean> {
     return await UserDeleteRepository(fields)
   }
