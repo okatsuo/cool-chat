@@ -7,3 +7,11 @@ export const UserRepository = (email: string) => {
     throw new Error(error)
   }
 }
+
+export const UserByIdRepository = (id: number) => {
+  try {
+    return prisma.user.findFirst({ where: { id } })
+  } catch (error) {
+    throw new Error(error)
+  }
+}
