@@ -1,11 +1,7 @@
 import { User } from '.prisma/client'
 import { sign, verify } from 'jsonwebtoken'
 import { constants } from '../../utils/constants'
-
-export interface UserAccessTokenInterface {
-  id: number
-  email: string
-}
+import { UserAccessTokenInterface } from './interface'
 
 export const makeAccessToken = (user: User) => {
   const user_data: UserAccessTokenInterface = {
@@ -15,7 +11,8 @@ export const makeAccessToken = (user: User) => {
   return sign(user_data, constants.secret_token, { expiresIn: constants.token_expiration })
 }
 
-export const verifyAcessToken = async (access_token: string) => {
-  const payload = verify(access_token, constants.secret_token)
-  console.log(payload) // TODO ver como fazer uma tipagem aqui
+export const verifyAcessToken = (access_token: string): UserAccessTokenInterface => {
+  const token = access_token.split(' ')[1]
+  const decoded = verify(token, constants.secret_token) as UserAccessTokenInterface
+  return decoded
 }

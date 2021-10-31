@@ -5,6 +5,8 @@ import { MessageResolver } from '../resolver/message-resolver'
 import { buildSchema } from 'type-graphql'
 import { ConnectionParamsInterface } from './protocol'
 import { UserResolver } from '../resolver/user-resolver'
+import { verifyAcessToken } from '../../infra/access-token'
+import { UserRepository } from '../../repository/user/user'
 
 class Main {
   private PORT = process.env.PORT || 6767;
@@ -17,11 +19,13 @@ class Main {
     const server = new ApolloServer({
       schema,
       subscriptions: {
-        onConnect: (connectionParams: ConnectionParamsInterface, webSocket, context) => {
-          if (connectionParams.Authorization) {
-            return console.log('a:', connectionParams.Authorization)
+        onConnect: async ({ Authorization }: ConnectionParamsInterface, webSocket, context) => {
+          if (Authorization) {
+            const { email } = verifyAcessToken(Authorization)
+            const user_exist = await UserRepository(email)
+            if (!user_exist) throw new Error('not authorized')
+            return true
           }
-
           throw new Error('token is missing.')
         }
       }
