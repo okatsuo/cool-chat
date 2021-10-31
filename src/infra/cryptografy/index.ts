@@ -1,7 +1,7 @@
 import { compare, hash } from 'bcrypt'
 
 export const encrypt = async (value: string) => {
-  const salt = process.env.SALT || 12
+  const salt = Number(process.env.SALT) || 12
   return hash(value, salt)
 }
 

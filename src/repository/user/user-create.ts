@@ -1,7 +1,7 @@
 import { User } from '.prisma/client'
 import { encrypt } from '../../infra/cryptografy'
 import { prisma } from '../prisma'
-import { UserInputInterface } from './protocol'
+import { UserInputInterface } from './interface'
 
 export const UserCreateRepository = async (fields: UserInputInterface): Promise<User> => {
   try {
