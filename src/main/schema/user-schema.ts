@@ -12,9 +12,6 @@ export class UserSchema {
   email: string
 
   @Field()
-  password: string
-
-  @Field()
   created_at: Date
 
   @Field()
