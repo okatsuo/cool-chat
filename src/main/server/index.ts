@@ -19,7 +19,9 @@ class Main {
     const server = new ApolloServer({
       schema,
       subscriptions: {
+        path: '/subscription',
         onConnect: async ({ Authorization }: ConnectionParamsInterface, webSocket, context) => {
+          console.log('alguem conectou')
           if (Authorization) {
             const { email } = verifyAcessToken(Authorization)
             const user_exist = await UserRepository(email)
