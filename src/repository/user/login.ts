@@ -8,9 +8,9 @@ export const LoginRepository = async ({ email, password }: UserConfirmationInput
   try {
     const user = await prisma.user.findFirst({ where: { email } })
     if (!user) throw (error.invalid_credentials)
-    const is_valid_password = compare_hash(password, user.password)
+    const is_valid_password = await compare_hash(password, user.password)
     if (!is_valid_password) throw (error.invalid_credentials)
-    const token = makeAccessToken(user)
+    const token = await makeAccessToken(user)
     return token
   } catch (error) {
     throw new Error(error)

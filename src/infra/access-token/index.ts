@@ -3,7 +3,7 @@ import { sign, verify } from 'jsonwebtoken'
 import { constants } from '../../utils/constants'
 import { UserAccessTokenInterface } from './interface'
 
-export const makeAccessToken = (user: User) => {
+export const makeAccessToken = async (user: User) => {
   const user_data: UserAccessTokenInterface = {
     id: user.id,
     email: user.email
