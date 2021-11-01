@@ -3,10 +3,7 @@ import 'dotenv/config'
 import { ApolloServer } from 'apollo-server'
 import { MessageResolver } from '../resolver/message-resolver'
 import { buildSchema } from 'type-graphql'
-import { ConnectionParamsInterface } from './protocol'
 import { UserResolver } from '../resolver/user-resolver'
-import { verifyAcessToken } from '../../infra/access-token'
-import { UserRepository } from '../../repository/user/user'
 
 class Main {
   private PORT = process.env.PORT || 6767;
@@ -19,17 +16,7 @@ class Main {
     const server = new ApolloServer({
       schema,
       subscriptions: {
-        path: '/subscription',
-        onConnect: async ({ Authorization }: ConnectionParamsInterface, webSocket, context) => {
-          console.log('alguem conectou')
-          if (Authorization) {
-            const { email } = verifyAcessToken(Authorization)
-            const user_exist = await UserRepository(email)
-            if (!user_exist) throw new Error('not authorized')
-            return true
-          }
-          throw new Error('token is missing.')
-        }
+        path: '/subscription'
       }
     })
     await server.listen(this.PORT)

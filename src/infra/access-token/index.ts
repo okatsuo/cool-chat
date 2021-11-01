@@ -11,8 +11,13 @@ export const makeAccessToken = async (user: User) => {
   return sign(user_data, constants.secret_token, { expiresIn: constants.token_expiration })
 }
 
-export const verifyAcessToken = (access_token: string): UserAccessTokenInterface => {
-  const token = access_token.split(' ')[1]
-  const decoded = verify(token, constants.secret_token) as UserAccessTokenInterface
-  return decoded
+export const verifyAcessToken = async (access_token: string): Promise<UserAccessTokenInterface> => {
+  try {
+    const token = access_token.split(' ')[1]
+    const decoded = verify(token, constants.secret_token) as UserAccessTokenInterface
+    console.log(decoded)
+    return decoded
+  } catch (error) {
+    throw new Error(error)
+  }
 }
