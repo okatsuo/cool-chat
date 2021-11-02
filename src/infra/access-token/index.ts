@@ -15,7 +15,6 @@ export const verifyAcessToken = async (access_token: string): Promise<UserAccess
   try {
     const token = access_token.split(' ')[1]
     const decoded = verify(token, constants.secret_token) as UserAccessTokenInterface
-    console.log(decoded)
     return decoded
   } catch (error) {
     throw new Error(error)
