@@ -1,8 +1,8 @@
 import { Arg, Ctx, Query, Resolver } from 'type-graphql'
-import { makeAccessToken } from '../../infra/access-token'
-import { error } from '../../utils/errors'
-import { LoginSchema } from '../schema/login'
-import { Context } from './protocol'
+import { makeAccessToken } from '../../../infra/access-token'
+import { error } from '../../../utils/errors'
+import { LoginSchema } from '../../schema/login'
+import { Context } from '..'
 
 @Resolver(of => LoginSchema)
 export class LoginResolver {

@@ -1,5 +1,5 @@
 import { Resolver, Root, Subscription } from 'type-graphql'
-import { topics } from '../../utils/constants'
+import { topics } from '../../../utils/constants'
 import { Message } from '@generated/type-graphql'
 
 @Resolver(() => Message)

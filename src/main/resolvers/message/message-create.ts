@@ -1,7 +1,7 @@
 import { Arg, Ctx, Mutation, PubSub, PubSubEngine, Resolver } from 'type-graphql'
 import { Message, MessageCreateInput } from '@generated/type-graphql'
-import { Context } from './protocol'
-import { topics } from '../../utils/constants'
+import { Context } from '..'
+import { topics } from '../../../utils/constants'
 
 Resolver(() => Message)
 export class MessageResolver {
