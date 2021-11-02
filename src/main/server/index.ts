@@ -1,20 +1,21 @@
 import 'reflect-metadata'
 import 'dotenv/config'
 import { ApolloServer } from 'apollo-server'
-import { MessageResolver } from '../resolver/message-resolver'
 import { buildSchema } from 'type-graphql'
-import { UserResolver } from '../resolver/user-resolver'
-
+import { resolvers as generated_resolvers } from '@generated/type-graphql'
+import { LoginResolver } from '../resolvers/login'
+import { prisma } from '../../infra/prisma-client'
 class Main {
   private PORT = process.env.PORT || 6767;
 
   async start () {
     const schema = await buildSchema({
-      resolvers: [MessageResolver, UserResolver]
+      resolvers: [LoginResolver, ...generated_resolvers]
     })
 
     const server = new ApolloServer({
       schema,
+      context: () => ({ prisma }),
       subscriptions: {
         path: '/subscription'
       }
