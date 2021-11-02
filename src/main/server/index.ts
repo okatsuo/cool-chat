@@ -6,12 +6,14 @@ import { resolvers as generated_resolvers } from '@generated/type-graphql'
 import { LoginResolver } from '../resolvers/login'
 import { prisma } from '../../infra/prisma-client'
 import { newMessage } from '../resolvers/new_message'
+import { UserProfile } from '../resolvers/user-profile'
+import { MessageResolver } from '../resolvers/message-create'
 class Main {
   private PORT = process.env.PORT || 6767;
 
   async start () {
     const schema = await buildSchema({
-      resolvers: [LoginResolver, newMessage, ...generated_resolvers]
+      resolvers: [LoginResolver, newMessage, UserProfile, MessageResolver, ...generated_resolvers]
     })
 
     const server = new ApolloServer({
