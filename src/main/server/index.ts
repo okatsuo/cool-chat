@@ -2,7 +2,7 @@ import 'reflect-metadata'
 import 'dotenv/config'
 import { ApolloServer } from 'apollo-server'
 import { buildSchema } from 'type-graphql'
-import { resolvers } from '@generated/type-graphql'
+import { resolvers as generated_resolvers } from '@generated/type-graphql'
 import { LoginResolver } from '../resolvers/login'
 import { prisma } from '../../infra/prisma-client'
 class Main {
@@ -10,7 +10,7 @@ class Main {
 
   async start () {
     const schema = await buildSchema({
-      resolvers: [LoginResolver, ...resolvers]
+      resolvers: [LoginResolver, ...generated_resolvers]
     })
 
     const server = new ApolloServer({
