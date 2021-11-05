@@ -4,7 +4,7 @@
     "lib": ["ES2021", "esnext.asynciterable"],
     "module": "commonjs",                                /* Specify what module code is generated. */
     "rootDir": "./",                                  /* Specify the root folder within your source files. */
-    "allowJs": true,                                  /* Allow JavaScript files to be a part of your program. Use the `checkJS` option to get errors from these files. */
+    "allowJs": true,                           /* Allow JavaScript files to be a part of your program. Use the `checkJS` option to get errors from these files. */
     "checkJs": true, 
     "outDir": "./dist",                                   /* Specify an output folder for all emitted files. */
     "forceConsistentCasingInFileNames": true,            /* Ensure that casing is correct in imports. */
